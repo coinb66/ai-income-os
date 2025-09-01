@@ -6,49 +6,85 @@
   <title>AI Income OS</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #f1f5f9;
       text-align: center;
-      padding: 50px;
     }
-    h1 {
+    header {
+      padding: 60px 20px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
       color: #38bdf8;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-top: 10px;
     }
     .box {
       max-width: 500px;
-      margin: auto;
+      margin: 40px auto;
       background: #1e293b;
-      padding: 20px;
-      border-radius: 8px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    input, select, button {
+    input, button {
       margin: 10px 0;
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    input {
+      background: #334155;
+      color: #f1f5f9;
+    }
+    input::placeholder {
+      color: #94a3b8;
     }
     button {
       background: #38bdf8;
       color: #0f172a;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
     button:hover {
       background: #0ea5e9;
     }
     .result {
       margin-top: 20px;
-      padding: 15px;
+      padding: 20px;
       background: #334155;
-      border-radius: 5px;
+      border-radius: 8px;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .copy-btn {
+      margin-top: 10px;
+      background: #22c55e;
+      color: white;
+    }
+    .copy-btn:hover {
+      background: #16a34a;
+    }
+    footer {
+      margin: 50px 0 20px;
+      font-size: 0.9rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 AI Income OS</h1>
-  <p>Enter your details and get your side-hustle idea instantly!</p>
+  <header>
+    <h1>🚀 AI Income OS</h1>
+    <p>Your personal side hustle generator powered by AI</p>
+  </header>
 
   <div class="box">
     <input type="text" id="skills" placeholder="Your skills (or type 'none')">
@@ -56,8 +92,15 @@
     <input type="text" id="location" placeholder="Your country">
     <button onclick="generateIdea()">Generate Idea</button>
 
-    <div id="output" class="result" style="display:none;"></div>
+    <div id="output" class="result" style="display:none;">
+      <p id="idea-text"></p>
+      <button class="copy-btn" onclick="copyIdea()">Copy Idea</button>
+    </div>
   </div>
+
+  <footer>
+    <p>Built with ❤️ for dreamers & hustlers</p>
+  </footer>
 
   <script>
     function generateIdea() {
@@ -66,14 +109,21 @@
       const location = document.getElementById("location").value || "your area";
 
       const idea = `Based on your input:
-      - Skills: ${skills}
-      - Time: ${time} hrs/week
-      - Location: ${location}
+- Skills: ${skills}
+- Time: ${time} hrs/week
+- Location: ${location}
 
-      👉 Suggested Hustle: Start a simple digital service (e.g. social media content, tutoring, or selling crafts online). We’ll soon connect this to AI for a full launch kit!`;
+👉 Suggested Hustle: Create and sell a micro-digital service (social media content, tutoring, or simple online products). Soon, this will connect directly with AI for a full launch kit!`;
 
       document.getElementById("output").style.display = "block";
-      document.getElementById("output").innerText = idea;
+      document.getElementById("idea-text").innerText = idea;
+    }
+
+    function copyIdea() {
+      const text = document.getElementById("idea-text").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Idea copied to clipboard!");
+      });
     }
   </script>
 </body>
